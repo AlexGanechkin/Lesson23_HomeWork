@@ -1,25 +1,15 @@
 import os
-from collections import Counter
 
 from flask import abort
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
-req = {
-  "file_name": "apache_logs.txt",
-  "cmd1": "limit",
-  "value1": "20",
-  "cmd2": "sort",
-  "value2": "asc"
-}
+
 
 def load_file(filename: str):
     try:
         with open(f'{DATA_DIR}/{filename}') as f:
-            while True:
-                line = f.readline()
-                if not line:
-                    break
+            for line in f:
                 yield line
     except FileNotFoundError:
         abort(400)
@@ -40,8 +30,11 @@ def _map(arr: list, value: int):
 
 
 def _unique(arr: list, value):
-    #map(lambda lst, x: lst.append(x) if x not in lst else x, arr)
-    return list(set(arr))
+    unique_list = []
+    for item in arr:
+        if item not in unique_list:
+            unique_list.append(item)
+    return unique_list
 
 
 def _sort(arr: list, value: str):

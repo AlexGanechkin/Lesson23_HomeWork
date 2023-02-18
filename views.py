@@ -1,5 +1,5 @@
 
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 
 from check_request import get_request_data
 from execute_request import load_file, _filter, _limit, _map, _unique, _sort
@@ -23,4 +23,4 @@ def perform_query():
     response = functions[data_dict['cmd1']](lines, data_dict['value1'])
     if data_dict['cmd2'] is not None:
         response = functions[data_dict['cmd2']](response, data_dict['value2'])
-    return response
+    return jsonify(response)
