@@ -1,9 +1,10 @@
 import re
+from typing import Dict, Optional
 
 from flask import abort
 
 
-def get_request_data(data):
+def get_request_data(data: Dict[str, str]) -> Dict[str, Optional[str]]:
     data_dict = {'file_name': data.get('file_name', None),
                  'cmd1': data.get('cmd1', None),
                  'value1': data.get('value1', None),
@@ -18,14 +19,14 @@ def get_request_data(data):
     return data_dict
 
 
-def check_filename(file_name):
+def check_filename(file_name: str) -> bool:
     pattern = '(^(.+)[^\.])\.txt$'
     if re.match(pattern, file_name) is None:
         abort(400)
     return True
 
 
-def check_request(cmd, value):
+def check_request(cmd: str, value: str) -> None:
     if cmd not in ('filter', 'limit', 'map', 'unique', 'sort', 'regex'):
         abort(400)
 
