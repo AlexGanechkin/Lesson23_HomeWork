@@ -1,4 +1,5 @@
 import os
+import re
 
 from flask import abort
 
@@ -44,3 +45,8 @@ def _sort(arr: list, value: str):
         value = True
 
     return list(sorted(arr, reverse=value))
+
+
+def _regex(arr: list, value: str):
+    pattern = re.compile(value)
+    return list(filter(lambda x: bool(pattern.findall(x)), arr))

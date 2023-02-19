@@ -26,7 +26,7 @@ def check_filename(file_name):
 
 
 def check_request(cmd, value):
-    if cmd not in ('filter', 'limit', 'map', 'unique', 'sort'):
+    if cmd not in ('filter', 'limit', 'map', 'unique', 'sort', 'regex'):
         abort(400)
 
     if cmd == 'filter':

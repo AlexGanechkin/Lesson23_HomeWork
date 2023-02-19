@@ -2,13 +2,14 @@
 from flask import Blueprint, request, jsonify
 
 from check_request import get_request_data
-from execute_request import load_file, _filter, _limit, _map, _unique, _sort
+from execute_request import load_file, _filter, _limit, _map, _unique, _sort, _regex
 
 functions = {'filter': _filter,
              'limit': _limit,
              'map': _map,
              'unique': _unique,
-             'sort': _sort
+             'sort': _sort,
+             'regex': _regex
              }
 
 query_blueprint = Blueprint('perform_query', __name__)
